@@ -107,4 +107,5 @@ public class CartController extends HttpServlet {
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		cart.updateCartItem(index, quantity);
 	}
+	
 }
