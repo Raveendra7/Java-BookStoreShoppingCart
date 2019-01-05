@@ -43,10 +43,13 @@ public class CartController extends HttpServlet {
 		try {
 			switch(action) {
 				case "/addcart":
-					 addToCart(request, response);
-           break;
-        default:
-           break;
+					addToCart(request, response);
+					break;
+				case "/delete":
+					deleteFromCart(request, response);
+					break;
+		        default:
+		        	break;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -85,5 +88,11 @@ public class CartController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+	}
+	private void deleteFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int index = Integer.parseInt(request.getParameter("index"));
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+		cart.deleteCartItem(index);
 	}
 }
